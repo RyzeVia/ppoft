@@ -1,0 +1,59 @@
+FUNCTION_NAME,mpi_xxx_f
+
+PRAGMA_DEFINITION
+MPI_XXX = mpi_xxx_f
+mpi_xxx = mpi_xxx_f
+mpi_xxx_ = mpi_xxx_f
+mpi_xxx__ = mpi_xxx_f
+END_PRAGMA_DEFINITION
+
+EXTERN_DEFINITION
+MPI_XXX
+mpi_xxx
+mpi_xxx_
+mpi_xxx__
+END_EXTERN_DEFINITION
+
+FUNCTION_CONTENTS
+init,void,1
+{
+    *v1 = MPI_Init( 0, 0 );
+}
+
+comm_rank,void,3
+{
+    *v3 = MPI_Comm_rank( (MPI_Comm)(*((MPI_Fint*)v1)), v2 ) ;
+}
+
+comm_size,void,3
+{
+    *v3 = MPI_Comm_size( (MPI_Comm)(*((MPI_Fint*)v1)), v2 );
+}
+
+bcast,void,6
+{
+    *v6 = MPI_Bcast(v1, (int)*(MPI_Fint*)v2, (MPI_Datatype)(*(MPI_Fint*)v3), (int)*(int*)v4, (MPI_Comm)(*(MPI_Fint*)v5) );
+}
+
+isend,void,8
+{
+    *v8 = MPI_Isend(v1, (int)*(MPI_Fint*)v2, (MPI_Datatype)(*(MPI_Fint*)v3), (int)*(MPI_Fint*)v4, (int)*(MPI_Fint*)v5, (MPI_Comm)(*(MPI_Fint*)v6), (MPI_Request *)(v7) );
+}
+
+irecv,void,8
+{
+    *v8 = MPI_Irecv( v1, (int)*(MPI_Fint*)v2, (MPI_Datatype)(*(MPI_Fint*)v3), (int)*(MPI_Fint*)v4, (int)*(MPI_Fint*)v5, (MPI_Comm)(*(MPI_Fint*)v6), (MPI_Request *)(v7) );
+}
+
+waitall,void,4
+{
+    if (v3 == MPI_F_STATUSES_IGNORE) { v3 = (void *)MPI_STATUSES_IGNORE; }
+    *v4 = MPI_Waitall( (int)*(MPI_Fint*)v1, (MPI_Request *)(v2), (MPI_Status *)v3 );
+}
+
+barrier,void,2
+{
+    *v2 = MPI_Barrier( (MPI_Comm)(*(MPI_Fint*)v1) );
+}
+
+END_FUNCTION_CONTENTS

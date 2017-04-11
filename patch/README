@@ -1,0 +1,10 @@
+move to ftb src dir and type:
+$ patch -p1 < ftb-0.6.2.patch
+
+or
+
+move to work dir with ftb-0.6.2.tgz and type:
+$ tar xzf ftb-0.6.2.tgz
+$ patch -p0 < ftb-0.6.2.patch
+
+

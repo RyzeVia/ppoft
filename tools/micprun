@@ -1,0 +1,3 @@
+#!/bin/sh
+
+mpirun -x LD_PRELOAD=mpi_hook.so $@
